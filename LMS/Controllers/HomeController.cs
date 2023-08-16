@@ -1,11 +1,10 @@
 ﻿using LMS.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LMS.Controllers
 {
@@ -13,14 +12,19 @@ namespace LMS.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly LMSDBContext _context;
+
+        public HomeController(ILogger<HomeController> logger, LMSDBContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var books = _context.Books.ToList() ?? new List<Book>();
+
+            return View(books);
         }
 
         public IActionResult Privacy()
