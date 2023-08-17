@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using LMS.Models.Base;
 
-namespace LMS.Models
+namespace LMS.Models.InventoryManagement
 {
-    [Table("Books", Schema = "LMS")]
+    [Table("Books", Schema = "IM")]
     public class Book : BaseEntity
     {
         public string Title { get; set; }
