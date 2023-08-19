@@ -1,25 +1,3 @@
-﻿@model IEnumerable<Book>
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <td>Title</td>
-            <td>Author</td>
-            <td>ISBN</td>
-            <td>Publisher</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model)
-        {
-            <tr>
-                <td>@book.Title</td>
-                <td>@book.Author</td>
-                <td>@book.ISBN</td>
-                <td>@book.Publisher</td>
-            </tr>
-        }
-    </tbody>
-</table>
