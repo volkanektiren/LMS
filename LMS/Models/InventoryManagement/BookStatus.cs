@@ -11,6 +11,7 @@ namespace LMS.Models.InventoryManagement
         public Guid BookId { get; set; }
 
         public BookStatusEnum Status { get; set; }
+        public DateTime Created { get; set; }
 
         public virtual Book Book { get; set; }
     }

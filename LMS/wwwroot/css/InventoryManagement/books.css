@@ -1,0 +1,11 @@
+﻿#booksTable div#bookStatus {
+    display: flex;
+    justify-content: space-between;
+}
+
+#booksTable div#actionsDiv {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}

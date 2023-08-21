@@ -25,7 +25,7 @@ namespace LMS
         {
             services.AddDbContext<LMSDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddScoped<IInventoryManagementService, InventoryManagementService>();
             services.AddScoped<IVisitorManagementService, VisitorManagementService>();

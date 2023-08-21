@@ -1,4 +1,5 @@
 ﻿using LMS.DTOs.Base;
+using LMS.Enums;
 
 namespace LMS.DTOs.InventoryManagement
 {
@@ -9,5 +10,7 @@ namespace LMS.DTOs.InventoryManagement
         public string Description { get; set; }
         public string ISBN { get; set; }
         public string Publisher { get; set; }
+
+        public BookStatusDTO LastStatus { get; set; }
     }
 }

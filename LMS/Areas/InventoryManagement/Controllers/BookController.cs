@@ -1,4 +1,5 @@
-﻿using LMS.Services.Interfaces;
+﻿using LMS.DTOs.InventoryManagement;
+using LMS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.Areas.InventoryManagement.Controllers
@@ -15,9 +16,27 @@ namespace LMS.Areas.InventoryManagement.Controllers
 
         public IActionResult ListPartial()
         {
+            return PartialView("List/_Partial");
+        }
+
+        public IActionResult ListTableDataPartial()
+        {
             var books = _inventoryManagementService.GetBooks();
 
-            return PartialView("List/_Partial", books);
+            return PartialView("List/_TableDataPartial", books);
+        }
+
+        public IActionResult CreatePartial()
+        {
+            return PartialView("Create/_Partial");
+        }
+
+        [HttpPost]
+        public IActionResult Create(BookDTO dto)
+        {
+            _inventoryManagementService.CreateBook(dto);
+
+            return Json(true);
         }
     }
 }
