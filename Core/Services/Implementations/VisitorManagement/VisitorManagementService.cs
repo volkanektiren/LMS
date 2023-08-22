@@ -15,6 +15,10 @@ namespace Core.Services.Implementations.VisitorManagement
         {
         }
 
+        /// <summary>
+        /// Ziyaretçi bilgileri getirilir
+        /// </summary>
+        /// <returns></returns>
         public List<VisitorDTO> GetVisitors()
         {
             var visitors = _context.Visitors
@@ -31,6 +35,10 @@ namespace Core.Services.Implementations.VisitorManagement
             return visitors;
         }
 
+        /// <summary>
+        /// Ziyaretçi kaydı oluşturma
+        /// </summary>
+        /// <param name="dto"></param>
         public void CreateVisitor(VisitorDTO dto)
         {
             var visitorEntity = new Visitor
@@ -47,6 +55,10 @@ namespace Core.Services.Implementations.VisitorManagement
             _context.SaveChanges();
         }
 
+        /// <summary>
+        /// Ziyaretçilerin isimlerini getirir, select dropdown için
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<Guid, string> GetVisitorFullNames()
         {
             var visitorFullNames = _context.Visitors

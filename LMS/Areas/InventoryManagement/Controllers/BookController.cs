@@ -20,11 +20,19 @@ namespace LMS.Areas.InventoryManagement.Controllers
             _visitorManagementService = visitorManagementService;
         }
 
+        /// <summary>
+        /// kitap tablosunu yükler
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ListPartial()
         {
             return PartialView("List/_Partial");
         }
 
+        /// <summary>
+        /// kitap tablo datasını yükler
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ListTableDataPartial()
         {
             var books = _inventoryManagementService.GetBooks();
@@ -32,11 +40,20 @@ namespace LMS.Areas.InventoryManagement.Controllers
             return PartialView("List/_TableDataPartial", books);
         }
 
+        /// <summary>
+        /// kitap ekleme formunu yükler
+        /// </summary>
+        /// <returns></returns>
         public IActionResult CreatePartial()
         {
             return PartialView("Create/_Partial");
         }
 
+        /// <summary>
+        /// kitap ekleme post
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Create(BookDTO dto)
         {
@@ -45,6 +62,11 @@ namespace LMS.Areas.InventoryManagement.Controllers
             return Json(true);
         }
 
+        /// <summary>
+        /// kitap ödünç verme formunu yükler
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
         public IActionResult LendPartial(string bookId)
         {
             var visitorFullNames = _visitorManagementService.GetVisitorFullNames();
@@ -55,6 +77,11 @@ namespace LMS.Areas.InventoryManagement.Controllers
             return PartialView("Lend/_Partial");
         }
 
+        /// <summary>
+        /// kitap ödünç verme post
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Lend(BookLendDTO dto)
         {
@@ -63,6 +90,11 @@ namespace LMS.Areas.InventoryManagement.Controllers
             return Json(true);
         }
 
+        /// <summary>
+        /// kitabın ödünç verilme bilgisini getirir
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
         public IActionResult LendingDetailsPartial(string bookId)
         {
             var bookGuid = Guid.Parse(bookId);
@@ -71,6 +103,11 @@ namespace LMS.Areas.InventoryManagement.Controllers
             return PartialView("Lend/_DetailsPartial", bookLend);
         }
 
+        /// <summary>
+        /// kitap iadesi post
+        /// </summary>
+        /// <param name="lendId"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Refund(string lendId)
         {

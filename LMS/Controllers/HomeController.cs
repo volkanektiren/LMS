@@ -27,6 +27,11 @@ namespace LMS.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /// <summary>
+        /// storage dan dosya indirme
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<IActionResult> DownloadFile(FileDTO dto)
         {
             var fileBytes = await _fileService.DownloadFile(dto);

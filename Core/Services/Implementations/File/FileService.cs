@@ -38,6 +38,11 @@ namespace Core.Services.Implementations.File
                 .Build();
         }
 
+        /// <summary>
+        /// Dosya yükleme
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public async Task<FileDTO> UploadFile(IFormFile file)
         {
             //Yüklenen dosyanın MemoryStream nesnesini oluşturalım
@@ -86,6 +91,11 @@ namespace Core.Services.Implementations.File
             };
         }
 
+        /// <summary>
+        /// Dosya indirme
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<byte[]> DownloadFile(FileDTO dto)
         {
             var objectName = dto.GetFullPath();
@@ -116,6 +126,11 @@ namespace Core.Services.Implementations.File
             return fileBytes;
         }
 
+        /// <summary>
+        /// Dosyanın storageda ki bilgisi getirilip, loglanır
+        /// </summary>
+        /// <param name="objectName"></param>
+        /// <returns></returns>
         private async Task LogObjectStats(string objectName)
         {
             // yüklenmiş dosya bilgilerinin loglanması

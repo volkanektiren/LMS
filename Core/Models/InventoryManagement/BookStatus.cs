@@ -10,7 +10,13 @@ namespace Core.Models.InventoryManagement
     {
         public Guid BookId { get; set; }
 
+        /// <summary>
+        /// Kitap durumu
+        /// </summary>
         public BookStatusEnum Status { get; set; }
+        /// <summary>
+        /// Durumun oluşma tarihi (durum değişikliklerinin historical tutulması için eklendi)
+        /// </summary>
         public DateTime Created { get; set; }
 
         public virtual Book Book { get; set; }

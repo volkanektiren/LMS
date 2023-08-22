@@ -13,8 +13,13 @@ namespace Core.Services.Implementations.InventoryManagement
 {
     public partial class InventoryManagementService
     {
+        /// <summary>
+        /// Kitaplar getirilir
+        /// </summary>
+        /// <returns></returns>
         public List<BookDTO> GetBooks()
         {
+            //kitaplar alfabetik bir şekilde sıralanmış gelir
             var books = _context.Books
                 .Include(x => x.CoverImage)
                 .Select(x => new
@@ -56,10 +61,17 @@ namespace Core.Services.Implementations.InventoryManagement
             return books;
         }
 
+        /// <summary>
+        /// Kitap ekleme
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task CreateBook(BookDTO dto)
         {
+            //kitap resminin object storage a yüklenmesi
             var coverImageDTO = await _fileService.UploadFile(dto.CoverImage);
 
+            //object storage a yüklenen dosyanın bilgisinin veritabanına kaydedilmesi
             var coverImage = new ObjectStorageFile
             {
                 Folder = coverImageDTO.Folder,
@@ -75,6 +87,7 @@ namespace Core.Services.Implementations.InventoryManagement
                 Author = dto.Author,
             };
 
+            //oluşturulan kitabın kütüphane içinde olma durumu kaydı
             var bookStatus = new BookStatus
             {
                 Book = book,

@@ -14,11 +14,19 @@ namespace LMS.Areas.VisitorManagement.Controllers
             _visitorManagementService = visitorManagementService;
         }
 
+        /// <summary>
+        /// ziyaretçi tablosunu yükler
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ListPartial()
         {
             return PartialView("List/_Partial");
         }
 
+        /// <summary>
+        /// ziyaretçi tablo datasını yükler
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ListTableDataPartial()
         {
             var visitors = _visitorManagementService.GetVisitors();
@@ -26,11 +34,20 @@ namespace LMS.Areas.VisitorManagement.Controllers
             return PartialView("List/_TableDataPartial", visitors);
         }
 
+        /// <summary>
+        /// ziyaretçi ekleme formunu yükler
+        /// </summary>
+        /// <returns></returns>
         public IActionResult CreatePartial()
         {
             return PartialView("Create/_Partial");
         }
 
+        /// <summary>
+        /// ziyaretçi ekleme post
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Create(VisitorDTO dto)
         {
