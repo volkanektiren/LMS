@@ -38,7 +38,7 @@
                 }
                 else if (book.LastStatus.Status.Equals(BookStatusEnum.OutLibrary))
                 {
-                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#lendingDetailsModal_@bookId">Lending Details</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#lendingDetailsModal_@bookId" onclick="books.loadLendingDetails('@bookId')">Lending Details</button>
 
                     <div class="modal fade" id="lendingDetailsModal_@bookId" tabindex="-1" role="dialog" aria-labelledby="lendingDetailsModalLabel_@bookId" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -49,11 +49,11 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    ...
+                                <div class="modal-body" id="lendingDetailsModalBody_@bookId">
+                                    
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Refund</button>
+                                    <button type="button" class="btn btn-primary" onclick="books.refund('@bookId')">Refund</button>
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,5 @@
 ﻿using LMS.DTOs.Base;
+using LMS.DTOs.VisitorManagement;
 using System;
 
 namespace LMS.DTOs.InventoryManagement
@@ -14,6 +15,11 @@ namespace LMS.DTOs.InventoryManagement
         /// Kitabı ödünç alan ziyaretçi id
         /// </summary>
         public Guid VisitorId { get; set; }
+
+        /// <summary>
+        /// Kitabı ödünç alan ziyaretçi
+        /// </summary>
+        public VisitorDTO Visitor { get; set; }
 
         /// <summary>
         /// Kitabın ödünç alınma tarihi

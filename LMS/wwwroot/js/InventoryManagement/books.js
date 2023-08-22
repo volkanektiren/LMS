@@ -32,17 +32,6 @@
     create: function () {
         var formElement = document.getElementById('addBookForm');
         var formData = new FormData(formElement);
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
-
-        var dto = {
-            Title: $("#addBookTitle").val(),
-            Author: $("#addBookAuthor").val(),
-            Description: $("#addBookDescription").val(),
-            ISBN: $("#addBookISBN").val(),
-            Publisher: $("#addBookPublisher").val(),
-        };
 
         common.requestSetup();
         $.ajax({
@@ -80,6 +69,30 @@
         $.post("/InventoryManagement/Book/Lend", { dto: dto })
             .done(function () {
                 var targetModal = $("#lendItModal_" + bookId);
+                targetModal.on('hidden.bs.modal', function (e) {
+                    books.loadTableData();
+                })
+
+                targetModal.modal('hide');
+            });
+    },
+    loadLendingDetails: function (bookId) {
+        let targetEl = $("#lendingDetailsModalBody_" + bookId);
+
+        common.requestSetup();
+        targetEl.load("/InventoryManagement/Book/LendingDetailsPartial", { bookId: bookId },
+            function (response, status, xhr) {
+
+            }
+        );
+    },
+    refund: function (bookId) {
+        var lendId = $("#bookLendId_" + bookId).val();
+
+        common.requestSetup();
+        $.post("/InventoryManagement/Book/Refund", { lendId: lendId })
+            .done(function () {
+                var targetModal = $("#lendingDetailsModal_" + bookId);
                 targetModal.on('hidden.bs.modal', function (e) {
                     books.loadTableData();
                 })

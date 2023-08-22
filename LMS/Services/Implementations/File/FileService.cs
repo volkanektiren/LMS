@@ -74,7 +74,7 @@ namespace LMS.Services.Implementations.File
             }
             catch (MinioException m)
             {
-
+                throw m;
             }
 
             return new FileDTO

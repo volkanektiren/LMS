@@ -61,6 +61,23 @@ namespace LMS.Areas.InventoryManagement.Controllers
         public IActionResult Lend(BookLendDTO dto)
         {
             _inventoryManagementService.LendBook(dto);
+            
+            return Json(true);
+        }
+
+        public IActionResult LendingDetailsPartial(string bookId)
+        {
+            var bookGuid = Guid.Parse(bookId);
+            var bookLend = _inventoryManagementService.GetLendingDetails(bookGuid);
+
+            return PartialView("Lend/_DetailsPartial", bookLend);
+        }
+
+        [HttpPost]
+        public IActionResult Refund(string lendId)
+        {
+            var lendGuid = Guid.Parse(lendId);
+            _inventoryManagementService.RefundBook(lendGuid);
 
             return Json(true);
         }
