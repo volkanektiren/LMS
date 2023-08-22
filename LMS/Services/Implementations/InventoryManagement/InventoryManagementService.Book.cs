@@ -14,6 +14,7 @@ namespace LMS.Services.Implementations.InventoryManagement
             var books = _context.Books
                 .Select(x => new
                 {
+                    x.Id,
                     x.Title,
                     x.Author,
                     x.Description, 
@@ -25,14 +26,14 @@ namespace LMS.Services.Implementations.InventoryManagement
                         .Select(y => new
                         {
                             y.Status,
-                            y.Created,
                         })
                         .First(),
                 })
-                .OrderByDescending(x => x.LastStatus.Created)
+                .OrderBy(x => x.Title)
                 .AsEnumerable()
                 .Select(x => new BookDTO
                 {
+                    Id = x.Id,
                     Title = x.Title,
                     Author = x.Author,
                     Description = x.Description,

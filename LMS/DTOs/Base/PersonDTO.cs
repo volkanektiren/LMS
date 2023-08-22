@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace LMS.Models.Base
+namespace LMS.DTOs.Base
 {
-    public abstract class Person : BaseEntity
+    public class PersonDTO : BaseDTO
     {
         public string Name { get; set; }
         public string Surname { get; set; }

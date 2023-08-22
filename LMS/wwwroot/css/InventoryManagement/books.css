@@ -9,3 +9,7 @@
     margin-top: 12px;
     margin-bottom: 12px;
 }
+
+#booksTable div#actionsDiv button {
+    margin-left: 12px;
+}

@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS.Models.InventoryManagement
 {
-    [Table("BookBorrows", Schema = "IM")]
-    public class BookBorrow : BaseEntity
+    [Table("BookLends", Schema = "IM")]
+    public class BookLend : BaseEntity
     {
         /// <summary>
         /// Ödünç alınan kitap id

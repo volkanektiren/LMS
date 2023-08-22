@@ -4,14 +4,16 @@ using LMS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSDBContext))]
-    partial class LMSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230821183842_NullableBirthDateOnVisitor")]
+    partial class NullableBirthDateOnVisitor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace LMS.Migrations
                     b.ToTable("Books","IM");
                 });
 
-            modelBuilder.Entity("LMS.Models.InventoryManagement.BookLend", b =>
+            modelBuilder.Entity("LMS.Models.InventoryManagement.BookBorrow", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +77,7 @@ namespace LMS.Migrations
 
                     b.HasIndex("VisitorId");
 
-                    b.ToTable("BookLends","IM");
+                    b.ToTable("BookBorrows","IM");
                 });
 
             modelBuilder.Entity("LMS.Models.InventoryManagement.BookStatus", b =>
@@ -126,7 +128,7 @@ namespace LMS.Migrations
                     b.ToTable("Visitors","VM");
                 });
 
-            modelBuilder.Entity("LMS.Models.InventoryManagement.BookLend", b =>
+            modelBuilder.Entity("LMS.Models.InventoryManagement.BookBorrow", b =>
                 {
                     b.HasOne("LMS.Models.InventoryManagement.Book", "Book")
                         .WithMany()

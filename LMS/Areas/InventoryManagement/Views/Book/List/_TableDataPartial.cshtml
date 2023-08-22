@@ -2,47 +2,48 @@
 
 @foreach (var book in Model)
 {
+    var bookId = book.Id.ToString();
     <tr>
         <td>@book.Title</td>
         <td>@book.Author</td>
+        <td>@book.Description</td>
         <td>@book.ISBN</td>
         <td>@book.Publisher</td>
         <td>
             <div id="bookStatus">
                 <span>@book.LastStatus.Status.ToUIString()</span>
-                @if (book.LastStatus.Equals(BookStatusEnum.InLibrary))
+                @if (book.LastStatus.Status.Equals(BookStatusEnum.InLibrary))
                 {
-                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#lendItModal">Lend It</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#lendItModal_@bookId" onclick="books.loadLend('@bookId')">Lend It</button>
 
-                    <div class="modal fade" id="lendItModal" tabindex="-1" role="dialog" aria-labelledby="lendItModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="lendItModal_@bookId" tabindex="-1" role="dialog" aria-labelledby="lendItModalLabel_@bookId" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="lendItModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="lendItModalLabel_@bookId">Lend - @book.Title</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    ...
+                                <div class="modal-body" id="lendItModalBody_@bookId">
+                                    
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary" onclick="books.lend('@bookId')">Lend</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
-                else if (book.LastStatus.Equals(BookStatusEnum.OutLibrary))
+                else if (book.LastStatus.Status.Equals(BookStatusEnum.OutLibrary))
                 {
-                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#lendingDetailsModal">Lending Details</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#lendingDetailsModal_@bookId">Lending Details</button>
 
-                    <div class="modal fade" id="lendingDetailsModal" tabindex="-1" role="dialog" aria-labelledby="lendingDetailsModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="lendingDetailsModal_@bookId" tabindex="-1" role="dialog" aria-labelledby="lendingDetailsModalLabel_@bookId" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="lendingDetailsModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="lendingDetailsModalLabel_@bookId">Lending Details - @book.Title</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -51,7 +52,6 @@
                                     ...
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>

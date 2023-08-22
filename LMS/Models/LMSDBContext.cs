@@ -1,7 +1,6 @@
 ﻿using LMS.Models.InventoryManagement;
 using LMS.Models.VisitorManagement;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 
 namespace LMS.Models
 {
@@ -14,7 +13,7 @@ namespace LMS.Models
 
         public DbSet<Book> Books { get; set; }
         public DbSet<BookStatus> BookStatuses { get; set; }
-        public DbSet<BookBorrow> BookBorrows { get; set; }
+        public DbSet<BookLend> BookLends { get; set; }
         public DbSet<Visitor> Visitors { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using LMS.DTOs.Base;
-using LMS.Enums;
 
 namespace LMS.DTOs.InventoryManagement
 {

@@ -45,5 +45,33 @@
 
             books.loadTableData();
         });
-    }
+    },
+    loadLend: function (bookId) {
+        let targetEl = $("#lendItModalBody_" + bookId);
+
+        common.requestSetup();
+        targetEl.load("/InventoryManagement/Book/LendPartial", { bookId: bookId },
+            function (response, status, xhr) {
+
+            }
+        );
+    },
+    lend: function (bookId) {
+        var dto = {
+            BookId: bookId,
+            VisitorId: $("#lendVisitorSelect_" + bookId).val(),
+            EstimatedReturnDate: $("#lendEstimatedReturnDate_" + bookId).val(),
+        };
+
+        common.requestSetup();
+        $.post("/InventoryManagement/Book/Lend", { dto: dto })
+            .done(function () {
+                var targetModal = $("#lendItModal_" + bookId);
+                targetModal.on('hidden.bs.modal', function (e) {
+                    books.loadTableData();
+                })
+
+                targetModal.modal('hide');
+            });
+    },
 }
