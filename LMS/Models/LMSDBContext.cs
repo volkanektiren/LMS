@@ -2,14 +2,34 @@
 using ObjectStorageFile = LMS.Models.ObjectStorage.File;
 using LMS.Models.VisitorManagement;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.DataEncryption;
+using Microsoft.EntityFrameworkCore.DataEncryption.Providers;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace LMS.Models
 {
     public class LMSDBContext : DbContext
     {
-        public LMSDBContext(DbContextOptions<LMSDBContext> options) : base(options)
-        {
+        private byte[] EncryptionKey { get; set; }
+        private byte[] EncryptionIv { get; set; }
+        private readonly IEncryptionProvider _encryptionProvider;
+        private readonly IConfiguration _configuration;
 
+        public LMSDBContext(DbContextOptions<LMSDBContext> options,
+            IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
+
+            EncryptionKey = Convert.FromBase64String(_configuration["Encryption:Key"]);
+            EncryptionIv = Convert.FromBase64String(_configuration["Encryption:Iv"]);
+
+            _encryptionProvider = new AesProvider(EncryptionKey, EncryptionIv);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.UseEncryption(_encryptionProvider);
         }
 
         public DbSet<Book> Books { get; set; }
