@@ -1,9 +1,8 @@
 ﻿using Common.DTOs.ObjectStorage;
-using LMS.Models;
-using LMS.Services.Interfaces;
+using Core.Services.Interfaces;
+using LMS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace LMS.Controllers

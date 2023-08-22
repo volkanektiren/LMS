@@ -1,5 +1,5 @@
 ﻿using Common.DTOs.VisitorManagement;
-using LMS.Services.Interfaces;
+using Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.Areas.VisitorManagement.Controllers

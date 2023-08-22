@@ -1,5 +1,5 @@
 ﻿using Common.DTOs.InventoryManagement;
-using LMS.Services.Interfaces;
+using Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
