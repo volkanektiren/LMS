@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSDBContext))]
-    [Migration("20230821183842_NullableBirthDateOnVisitor")]
-    partial class NullableBirthDateOnVisitor
+    [Migration("20230822193345_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,24 +30,20 @@ namespace LMS.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Publisher")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("CoverImageId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CoverImageId");
+
                     b.ToTable("Books","IM");
                 });
 
-            modelBuilder.Entity("LMS.Models.InventoryManagement.BookBorrow", b =>
+            modelBuilder.Entity("LMS.Models.InventoryManagement.BookLend", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +73,7 @@ namespace LMS.Migrations
 
                     b.HasIndex("VisitorId");
 
-                    b.ToTable("BookBorrows","IM");
+                    b.ToTable("BookLends","IM");
                 });
 
             modelBuilder.Entity("LMS.Models.InventoryManagement.BookStatus", b =>
@@ -100,6 +96,29 @@ namespace LMS.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("BookStatuses","IM");
+                });
+
+            modelBuilder.Entity("LMS.Models.ObjectStorage.File", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Folder")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Files","OS");
                 });
 
             modelBuilder.Entity("LMS.Models.VisitorManagement.Visitor", b =>
@@ -128,7 +147,16 @@ namespace LMS.Migrations
                     b.ToTable("Visitors","VM");
                 });
 
-            modelBuilder.Entity("LMS.Models.InventoryManagement.BookBorrow", b =>
+            modelBuilder.Entity("LMS.Models.InventoryManagement.Book", b =>
+                {
+                    b.HasOne("LMS.Models.ObjectStorage.File", "CoverImage")
+                        .WithMany()
+                        .HasForeignKey("CoverImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LMS.Models.InventoryManagement.BookLend", b =>
                 {
                     b.HasOne("LMS.Models.InventoryManagement.Book", "Book")
                         .WithMany()

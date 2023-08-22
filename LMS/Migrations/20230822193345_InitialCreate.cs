@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LMS.Migrations
 {
-    public partial class InventoryManagementSchemaAdded : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,33 +11,25 @@ namespace LMS.Migrations
                 name: "IM");
 
             migrationBuilder.EnsureSchema(
+                name: "OS");
+
+            migrationBuilder.EnsureSchema(
                 name: "VM");
 
-            migrationBuilder.RenameTable(
-                name: "Books",
-                schema: "LMS",
-                newName: "Books",
-                newSchema: "IM");
-
             migrationBuilder.CreateTable(
-                name: "BookStatuses",
-                schema: "IM",
+                name: "Files",
+                schema: "OS",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    BookId = table.Column<Guid>(nullable: false),
-                    Status = table.Column<byte>(nullable: false)
+                    Folder = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Extension = table.Column<string>(nullable: true),
+                    ContentType = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookStatuses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BookStatuses_Books_BookId",
-                        column: x => x.BookId,
-                        principalSchema: "IM",
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Files", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,7 +42,7 @@ namespace LMS.Migrations
                     Surname = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
-                    BirthDate = table.Column<DateTime>(nullable: false)
+                    BirthDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,7 +50,29 @@ namespace LMS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookBorrows",
+                name: "Books",
+                schema: "IM",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CoverImageId = table.Column<Guid>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Author = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_Files_CoverImageId",
+                        column: x => x.CoverImageId,
+                        principalSchema: "OS",
+                        principalTable: "Files",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookLends",
                 schema: "IM",
                 columns: table => new
                 {
@@ -72,16 +86,16 @@ namespace LMS.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookBorrows", x => x.Id);
+                    table.PrimaryKey("PK_BookLends", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BookBorrows_Books_BookId",
+                        name: "FK_BookLends_Books_BookId",
                         column: x => x.BookId,
                         principalSchema: "IM",
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookBorrows_Visitors_VisitorId",
+                        name: "FK_BookLends_Visitors_VisitorId",
                         column: x => x.VisitorId,
                         principalSchema: "VM",
                         principalTable: "Visitors",
@@ -89,17 +103,45 @@ namespace LMS.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_BookBorrows_BookId",
+            migrationBuilder.CreateTable(
+                name: "BookStatuses",
                 schema: "IM",
-                table: "BookBorrows",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    BookId = table.Column<Guid>(nullable: false),
+                    Status = table.Column<byte>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookStatuses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BookStatuses_Books_BookId",
+                        column: x => x.BookId,
+                        principalSchema: "IM",
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookLends_BookId",
+                schema: "IM",
+                table: "BookLends",
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookBorrows_VisitorId",
+                name: "IX_BookLends_VisitorId",
                 schema: "IM",
-                table: "BookBorrows",
+                table: "BookLends",
                 column: "VisitorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_CoverImageId",
+                schema: "IM",
+                table: "Books",
+                column: "CoverImageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookStatuses_BookId",
@@ -111,7 +153,7 @@ namespace LMS.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookBorrows",
+                name: "BookLends",
                 schema: "IM");
 
             migrationBuilder.DropTable(
@@ -122,14 +164,13 @@ namespace LMS.Migrations
                 name: "Visitors",
                 schema: "VM");
 
-            migrationBuilder.EnsureSchema(
-                name: "LMS");
-
-            migrationBuilder.RenameTable(
+            migrationBuilder.DropTable(
                 name: "Books",
-                schema: "IM",
-                newName: "Books",
-                newSchema: "LMS");
+                schema: "IM");
+
+            migrationBuilder.DropTable(
+                name: "Files",
+                schema: "OS");
         }
     }
 }
