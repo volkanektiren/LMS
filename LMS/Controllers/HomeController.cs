@@ -1,33 +1,23 @@
-﻿using LMS.Models;
+﻿using LMS.DTOs.ObjectStorage;
+using LMS.Models;
+using LMS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace LMS.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IFileService _fileService;
 
-        private readonly LMSDBContext _context;
-
-        public HomeController(ILogger<HomeController> logger, LMSDBContext context)
+        public HomeController(IFileService fileService)
         {
-            _logger = logger;
-            _context = context;
+            _fileService = fileService;
         }
 
         public IActionResult Index()
-        {
-            var books = _context.Books.ToList() ?? new List<Book>();
-
-            return View(books);
-        }
-
-        public IActionResult Privacy()
         {
             return View();
         }
@@ -36,6 +26,13 @@ namespace LMS.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> DownloadFile(FileDTO dto)
+        {
+            var fileBytes = await _fileService.DownloadFile(dto);
+
+            return File(fileBytes, dto.ContentType);
         }
     }
 }

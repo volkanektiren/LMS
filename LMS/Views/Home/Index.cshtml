@@ -1,25 +1,18 @@
-﻿@model IEnumerable<Book>
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <td>Title</td>
-            <td>Author</td>
-            <td>ISBN</td>
-            <td>Publisher</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model)
-        {
-            <tr>
-                <td>@book.Title</td>
-                <td>@book.Author</td>
-                <td>@book.ISBN</td>
-                <td>@book.Publisher</td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+<script src="~/js/InventoryManagement/books.js"></script>
+<script src="~/js/VisitorManagement/visitors.js"></script>
+<link rel="stylesheet" href="~/css/InventoryManagement/books.css" />
+<link rel="stylesheet" href="~/css/VisitorManagement/visitors.css" />
+
+<div id="booksTable">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        books.load();
+    })
+</script>

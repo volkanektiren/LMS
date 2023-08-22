@@ -4,14 +4,16 @@ using LMS.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSDBContext))]
-    partial class LMSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230822075423_BookLendTableNameChanged")]
+    partial class BookLendTableNameChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace LMS.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CoverImageId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -44,8 +43,6 @@ namespace LMS.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CoverImageId");
 
                     b.ToTable("Books","IM");
                 });
@@ -105,29 +102,6 @@ namespace LMS.Migrations
                     b.ToTable("BookStatuses","IM");
                 });
 
-            modelBuilder.Entity("LMS.Models.ObjectStorage.File", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Folder")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Files","OS");
-                });
-
             modelBuilder.Entity("LMS.Models.VisitorManagement.Visitor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -152,15 +126,6 @@ namespace LMS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Visitors","VM");
-                });
-
-            modelBuilder.Entity("LMS.Models.InventoryManagement.Book", b =>
-                {
-                    b.HasOne("LMS.Models.ObjectStorage.File", "CoverImage")
-                        .WithMany()
-                        .HasForeignKey("CoverImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("LMS.Models.InventoryManagement.BookLend", b =>

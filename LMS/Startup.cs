@@ -1,4 +1,8 @@
 using LMS.Models;
+using LMS.Services.Implementations.File;
+using LMS.Services.Implementations.InventoryManagement;
+using LMS.Services.Implementations.VisitorManagement;
+using LMS.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +26,12 @@ namespace LMS
         {
             services.AddDbContext<LMSDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddScoped<IFileService, FileService>();
+
+            services.AddScoped<IInventoryManagementService, InventoryManagementService>();
+            services.AddScoped<IVisitorManagementService, VisitorManagementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,8 +57,12 @@ namespace LMS
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                                    name: "areaRoute",
+                                    pattern: "{area:exists}/{controller}/{action}");
+
+                endpoints.MapControllerRoute(
+                                    name: "default",
+                                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

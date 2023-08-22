@@ -1,0 +1,32 @@
+﻿@{
+    var bookId = ViewBag.BookId;
+}
+
+<div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Choose a Visitor</span>
+    </div>
+    <select class="form-control" id="lendVisitorSelect_@bookId" aria-label="Choose a Visitor" aria-describedby="inputGroup-sizing-sm">
+        <option></option>
+        @foreach (var visitorFullName in ViewBag.VisitorFullNames)
+        {
+            <option value="@visitorFullName.Key">@visitorFullName.Value</option>
+        }
+    </select>
+</div>
+
+<div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Estimated Return Date</span>
+    </div>
+    <input type="date" id="lendEstimatedReturnDate_@bookId" class="form-control" aria-label="Estimated Return Date" aria-describedby="inputGroup-sizing-sm">
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#lendVisitorSelect_@bookId').select2({
+            placeholder: "Select",
+            width: '349'
+        });
+    });
+</script>

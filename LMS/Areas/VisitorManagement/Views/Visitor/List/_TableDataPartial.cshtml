@@ -1,0 +1,12 @@
+﻿@model List<VisitorDTO>
+
+@foreach (var visitor in Model)
+{
+    <tr>
+        <td>@visitor.Name</td>
+        <td>@visitor.Surname</td>
+        <td>@visitor.Email</td>
+        <td>@visitor.Phone</td>
+        <td>@(visitor.BirthDate.HasValue ? visitor.BirthDate.Value.ToString("dd.MM.yyyy") : string.Empty)</td>
+    </tr>
+}

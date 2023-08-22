@@ -1,0 +1,68 @@
+﻿<h4>Books</h4>
+<div id="actionsDiv">
+    <button type="button" id="visitorsButton" class="btn btn-primary" data-toggle="modal" data-target="#visitorListModal" onclick="visitors.load()">Visitors</button>
+    <div class="modal fade" id="visitorListModal" tabindex="-1" role="dialog" aria-labelledby="visitorListModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="visitorListModalLabel">Visitors</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="visitorListModalBody">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addVisitorModal" tabindex="-1" role="dialog" aria-labelledby="addVisitorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addVisitorModalLabel">Add a New Visitor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="addVisitorModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="visitors.create()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBookModal" onclick="books.loadCreate()">Add a New Book</button>
+    <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addBookModalLabel">Add a New Book</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="addBookModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="books.create()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col"><h6>Cover Image</h6></th>
+                <th scope="col"><h6>Title</h6></th>
+                <th scope="col"><h6>Author</h6></th>
+                <th scope="col"><h6>Status</h6></th>
+            </tr>
+        </thead>
+        <tbody id="booksTableBody">
+        </tbody>
+    </table>
+</div>
