@@ -1,4 +1,4 @@
-﻿using LMS.Enums;
+﻿using Common.Enums;
 using LMS.Models.Base;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;

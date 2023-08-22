@@ -1,4 +1,4 @@
-﻿using LMS.DTOs.VisitorManagement;
+﻿using Common.DTOs.VisitorManagement;
 using System;
 using System.Collections.Generic;
 

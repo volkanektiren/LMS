@@ -1,6 +1,6 @@
-﻿using LMS.Enums;
+﻿using Common.Enums;
 
-namespace LMS.Extensions
+namespace Common.Extensions
 {
     public static class BookStatusExtension
     {

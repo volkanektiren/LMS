@@ -1,4 +1,4 @@
-﻿namespace LMS.Enums
+﻿namespace Common.Enums
 {
     public enum BookStatusEnum : byte
     {

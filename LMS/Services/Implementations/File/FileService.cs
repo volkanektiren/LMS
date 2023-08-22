@@ -1,4 +1,4 @@
-﻿using LMS.DTOs.ObjectStorage;
+﻿using Common.DTOs.ObjectStorage;
 using LMS.Models;
 using LMS.Services.Implementations.Base;
 using LMS.Services.Interfaces;

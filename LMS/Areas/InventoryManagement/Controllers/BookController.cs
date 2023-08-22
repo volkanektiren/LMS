@@ -1,4 +1,4 @@
-﻿using LMS.DTOs.InventoryManagement;
+﻿using Common.DTOs.InventoryManagement;
 using LMS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,8 +10,6 @@ namespace LMS.Areas.InventoryManagement.Controllers
     [Area("InventoryManagement")]
     public class BookController : Controller
     {
-        private readonly IFileService _fileService;
-
         private readonly IInventoryManagementService _inventoryManagementService;
         private readonly IVisitorManagementService _visitorManagementService;
 

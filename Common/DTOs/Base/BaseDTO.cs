@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LMS.DTOs.Base
+namespace Common.DTOs.Base
 {
     public abstract class BaseDTO
     {

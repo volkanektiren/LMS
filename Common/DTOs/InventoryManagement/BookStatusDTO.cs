@@ -1,7 +1,7 @@
-﻿using LMS.Enums;
+﻿using Common.Enums;
 using System;
 
-namespace LMS.DTOs.InventoryManagement
+namespace Common.DTOs.InventoryManagement
 {
     public class BookStatusDTO
     {

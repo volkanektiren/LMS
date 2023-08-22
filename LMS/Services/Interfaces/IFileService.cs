@@ -1,4 +1,4 @@
-﻿using LMS.DTOs.ObjectStorage;
+﻿using Common.DTOs.ObjectStorage;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 

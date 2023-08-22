@@ -1,5 +1,5 @@
-﻿using LMS.DTOs.InventoryManagement;
-using LMS.Enums;
+﻿using Common.DTOs.InventoryManagement;
+using Common.Enums;
 using LMS.Models.InventoryManagement;
 using ObjectStorageFile = LMS.Models.ObjectStorage.File;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using LMS.DTOs.ObjectStorage;
+using Common.DTOs.ObjectStorage;
 
 namespace LMS.Services.Implementations.InventoryManagement
 {

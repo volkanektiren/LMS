@@ -1,4 +1,4 @@
-﻿using LMS.DTOs.VisitorManagement;
+﻿using Common.DTOs.VisitorManagement;
 using LMS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

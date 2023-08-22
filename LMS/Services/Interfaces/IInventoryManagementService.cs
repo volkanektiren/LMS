@@ -1,4 +1,4 @@
-﻿using LMS.DTOs.InventoryManagement;
+﻿using Common.DTOs.InventoryManagement;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

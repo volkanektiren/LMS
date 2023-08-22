@@ -1,7 +1,7 @@
-﻿using LMS.DTOs.Base;
+﻿using Common.DTOs.Base;
 using System;
 
-namespace LMS.DTOs.ObjectStorage
+namespace Common.DTOs.ObjectStorage
 {
     public class FileDTO : BaseDTO
     {

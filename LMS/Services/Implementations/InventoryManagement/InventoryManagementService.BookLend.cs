@@ -1,6 +1,6 @@
-﻿using LMS.DTOs.InventoryManagement;
-using LMS.DTOs.VisitorManagement;
-using LMS.Enums;
+﻿using Common.DTOs.InventoryManagement;
+using Common.DTOs.VisitorManagement;
+using Common.Enums;
 using LMS.Models.InventoryManagement;
 using System;
 using System.Linq;

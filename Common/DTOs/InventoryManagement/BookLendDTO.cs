@@ -1,8 +1,8 @@
-﻿using LMS.DTOs.Base;
-using LMS.DTOs.VisitorManagement;
+﻿using Common.DTOs.Base;
+using Common.DTOs.VisitorManagement;
 using System;
 
-namespace LMS.DTOs.InventoryManagement
+namespace Common.DTOs.InventoryManagement
 {
     public class BookLendDTO : BaseDTO
     {

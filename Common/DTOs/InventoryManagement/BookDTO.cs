@@ -1,8 +1,8 @@
-﻿using LMS.DTOs.Base;
-using LMS.DTOs.ObjectStorage;
+﻿using Common.DTOs.Base;
+using Common.DTOs.ObjectStorage;
 using Microsoft.AspNetCore.Http;
 
-namespace LMS.DTOs.InventoryManagement
+namespace Common.DTOs.InventoryManagement
 {
     public class BookDTO : BaseDTO
     {

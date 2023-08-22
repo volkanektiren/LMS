@@ -1,4 +1,4 @@
-﻿using LMS.DTOs.VisitorManagement;
+﻿using Common.DTOs.VisitorManagement;
 using LMS.Models;
 using LMS.Models.VisitorManagement;
 using LMS.Services.Implementations.Base;
