@@ -3,16 +3,20 @@ using LMS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LMS.Areas.InventoryManagement.Controllers
 {
     [Area("InventoryManagement")]
     public class BookController : Controller
     {
+        private readonly IFileService _fileService;
+
         private readonly IInventoryManagementService _inventoryManagementService;
         private readonly IVisitorManagementService _visitorManagementService;
 
-        public BookController(IInventoryManagementService inventoryManagementService, IVisitorManagementService visitorManagementService)
+        public BookController(IInventoryManagementService inventoryManagementService, 
+            IVisitorManagementService visitorManagementService)
         {
             _inventoryManagementService = inventoryManagementService;
             _visitorManagementService = visitorManagementService;
@@ -36,9 +40,9 @@ namespace LMS.Areas.InventoryManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(BookDTO dto)
+        public async Task<IActionResult> Create(BookDTO dto)
         {
-            _inventoryManagementService.CreateBook(dto);
+            await _inventoryManagementService.CreateBook(dto);
 
             return Json(true);
         }

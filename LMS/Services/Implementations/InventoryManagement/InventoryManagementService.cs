@@ -6,8 +6,13 @@ namespace LMS.Services.Implementations.InventoryManagement
 {
     public partial class InventoryManagementService : BaseService, IInventoryManagementService
     {
-        public InventoryManagementService(LMSDBContext context) : base(context)
+        private readonly IFileService _fileService;
+
+        public InventoryManagementService(LMSDBContext context, 
+            IFileService fileService)
+            : base(context)
         {
+            _fileService = fileService;
         }
     }
 }

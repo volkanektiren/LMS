@@ -1,34 +1,43 @@
-﻿<div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+﻿<form id="addBookForm">
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Cover Image</span>
+        </div>
+        <input name="CoverImage" type="file" id="addBookCoverImage" aria-label="Cover Image" aria-describedby="inputGroup-sizing-sm" accept="image/png, image/jpeg">
     </div>
-    <input type="text" id="addBookTitle" class="form-control" aria-label="Title" aria-describedby="inputGroup-sizing-sm">
-</div>
 
-<div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Author</span>
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+        </div>
+        <input name="Title" type="text" id="addBookTitle" class="form-control" aria-label="Title" aria-describedby="inputGroup-sizing-sm">
     </div>
-    <input type="text" id="addBookAuthor" class="form-control" aria-label="Author" aria-describedby="inputGroup-sizing-sm">
-</div>
 
-<div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Author</span>
+        </div>
+        <input name="Author" type="text" id="addBookAuthor" class="form-control" aria-label="Author" aria-describedby="inputGroup-sizing-sm">
     </div>
-    <textarea id="addBookDescription" class="form-control" aria-label="Description" aria-describedby="inputGroup-sizing-sm"></textarea>
-</div>
 
-<div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">ISBN</span>
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+        </div>
+        <textarea name="Description" id="addBookDescription" class="form-control" aria-label="Description" aria-describedby="inputGroup-sizing-sm"></textarea>
     </div>
-    <input type="text" id="addBookISBN" class="form-control" aria-label="ISBN" aria-describedby="inputGroup-sizing-sm">
-</div>
 
-<div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Publisher</span>
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">ISBN</span>
+        </div>
+        <input name="ISBN" type="text" id="addBookISBN" class="form-control" aria-label="ISBN" aria-describedby="inputGroup-sizing-sm">
     </div>
-    <input type="text" id="addBookPublisher" class="form-control" aria-label="Publisher" aria-describedby="inputGroup-sizing-sm">
-</div>
+
+    <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Publisher</span>
+        </div>
+        <input type="text" name="Publisher" id="addBookPublisher" class="form-control" aria-label="Publisher" aria-describedby="inputGroup-sizing-sm">
+    </div>
+</form>

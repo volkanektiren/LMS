@@ -4,11 +4,12 @@
 {
     var bookId = book.Id.ToString();
     <tr>
+        <td>
+            <img src="/Home/DownloadFile?Folder=@(book.CoverImageDTO.Folder)&Name=@(book.CoverImageDTO.Name)&Extension=@(book.CoverImageDTO.Extension)&ContentType=@(book.CoverImageDTO.ContentType)"
+                 alt="" width="96" height="144">
+        </td>
         <td>@book.Title</td>
         <td>@book.Author</td>
-        <td>@book.Description</td>
-        <td>@book.ISBN</td>
-        <td>@book.Publisher</td>
         <td>
             <div id="bookStatus">
                 <span>@book.LastStatus.Status.ToUIString()</span>
@@ -52,7 +53,7 @@
                                     ...
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary">Refund</button>
                                 </div>
                             </div>
                         </div>

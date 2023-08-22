@@ -30,6 +30,12 @@
         );
     },
     create: function () {
+        var formElement = document.getElementById('addBookForm');
+        var formData = new FormData(formElement);
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
         var dto = {
             Title: $("#addBookTitle").val(),
             Author: $("#addBookAuthor").val(),
@@ -39,11 +45,18 @@
         };
 
         common.requestSetup();
-        $.post("/InventoryManagement/Book/Create", { dto: dto })
-        .done(function () {
-            $("#addBookModal").modal('hide');
+        $.ajax({
+            url: '/InventoryManagement/Book/Create',
+            type: 'POST',
+            cache: false,
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function () {
+                $("#addBookModal").modal('hide');
 
-            books.loadTableData();
+                books.loadTableData();
+            }
         });
     },
     loadLend: function (bookId) {

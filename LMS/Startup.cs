@@ -1,4 +1,5 @@
 using LMS.Models;
+using LMS.Services.Implementations.File;
 using LMS.Services.Implementations.InventoryManagement;
 using LMS.Services.Implementations.VisitorManagement;
 using LMS.Services.Interfaces;
@@ -26,6 +27,8 @@ namespace LMS
             services.AddDbContext<LMSDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddScoped<IFileService, FileService>();
 
             services.AddScoped<IInventoryManagementService, InventoryManagementService>();
             services.AddScoped<IVisitorManagementService, VisitorManagementService>();

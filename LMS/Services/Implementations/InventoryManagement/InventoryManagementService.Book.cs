@@ -1,9 +1,13 @@
 ﻿using LMS.DTOs.InventoryManagement;
 using LMS.Enums;
 using LMS.Models.InventoryManagement;
+using ObjectStorageFile = LMS.Models.ObjectStorage.File;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using LMS.DTOs.ObjectStorage;
 
 namespace LMS.Services.Implementations.InventoryManagement
 {
@@ -12,14 +16,13 @@ namespace LMS.Services.Implementations.InventoryManagement
         public List<BookDTO> GetBooks()
         {
             var books = _context.Books
+                .Include(x => x.CoverImage)
                 .Select(x => new
                 {
                     x.Id,
+                    x.CoverImage,
                     x.Title,
                     x.Author,
-                    x.Description, 
-                    x.ISBN,
-                    x.Publisher,
                     LastStatus = _context.BookStatuses
                         .Where(y => y.BookId.Equals(x.Id))
                         .OrderByDescending(y => y.Created)
@@ -34,11 +37,15 @@ namespace LMS.Services.Implementations.InventoryManagement
                 .Select(x => new BookDTO
                 {
                     Id = x.Id,
+                    CoverImageDTO = new FileDTO
+                    {
+                        Folder = x.CoverImage.Folder,
+                        Name = x.CoverImage.Name,
+                        Extension = x.CoverImage.Extension,
+                        ContentType = x.CoverImage.ContentType,
+                    },
                     Title = x.Title,
                     Author = x.Author,
-                    Description = x.Description,
-                    ISBN = x.ISBN,
-                    Publisher = x.Publisher,
                     LastStatus = new BookStatusDTO
                     {
                         Status = x.LastStatus.Status,
@@ -49,28 +56,37 @@ namespace LMS.Services.Implementations.InventoryManagement
             return books;
         }
 
-        public void CreateBook(BookDTO dto)
+        public async Task CreateBook(BookDTO dto)
         {
-            var bookEntity = new Book
+            var coverImageDTO = await _fileService.UploadFile(dto.CoverImage);
+
+            var coverImage = new ObjectStorageFile
             {
-                Title = dto.Title,
-                Author = dto.Author,
-                Description = dto.Description,
-                ISBN = dto.ISBN,
-                Publisher = dto.Publisher,
+                Folder = coverImageDTO.Folder,
+                Name = coverImageDTO.Name,
+                Extension = coverImageDTO.Extension,
+                ContentType = coverImageDTO.ContentType,
             };
 
-            var bookStatusEntity = new BookStatus
+            var book = new Book
             {
-                Book = bookEntity,
+                CoverImage = coverImage,
+                Title = dto.Title,
+                Author = dto.Author,
+            };
+
+            var bookStatus = new BookStatus
+            {
+                Book = book,
                 Status = BookStatusEnum.InLibrary,
                 Created = DateTime.Now,
             };
 
-            _context.Books.Add(bookEntity);
-            _context.BookStatuses.Add(bookStatusEntity);
+            await _context.Files.AddAsync(coverImage);
+            await _context.Books.AddAsync(book);
+            await _context.BookStatuses.AddAsync(bookStatus);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
