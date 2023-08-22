@@ -1,4 +1,7 @@
 ﻿var visitors = {
+    /**
+     * ziyaretçi tablosunu yükler
+     */
     load: function () {
         let targetEl = $("#visitorListModalBody");
 
@@ -9,6 +12,9 @@
             }
         );
     },
+    /**
+     * ziyaretçi tablo datasını yükler
+     */
     loadTableData: function () {
         let targetEl = $("#visitorsTableBody");
 
@@ -19,6 +25,9 @@
             }
         );
     },
+    /**
+     * ziyaretçi ekleme formunu yükler
+     */
     loadCreate: function () {
         let targetEl = $("#addVisitorModalBody");
 
@@ -29,6 +38,9 @@
             }
         );
     },
+    /**
+     * ziyaretçi ekleme post
+     */
     create: function () {
         var dto = {
             Name: $("#addVisitorName").val(),

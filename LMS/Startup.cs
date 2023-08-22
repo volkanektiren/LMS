@@ -1,8 +1,8 @@
-using LMS.Models;
-using LMS.Services.Implementations.File;
-using LMS.Services.Implementations.InventoryManagement;
-using LMS.Services.Implementations.VisitorManagement;
-using LMS.Services.Interfaces;
+using Core.Models;
+using Core.Services.Implementations.File;
+using Core.Services.Implementations.InventoryManagement;
+using Core.Services.Implementations.VisitorManagement;
+using Core.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,7 @@
 ﻿var books = {
+    /**
+     * kitap tablosunu yükler
+     */
     load: function () {
         let targetEl = $("#booksTable");
 
@@ -9,6 +12,9 @@
             }
         );
     },
+    /**
+     * kitap tablo datasını yükler
+     */
     loadTableData: function () {
         let targetEl = $("#booksTableBody");
 
@@ -19,6 +25,9 @@
             }
         );
     },
+    /**
+     * kitap ekleme formunu yükler
+     */
     loadCreate: function () {
         let targetEl = $("#addBookModalBody");
 
@@ -29,6 +38,9 @@
             }
         );
     },
+    /**
+     * kitap ekleme post
+     */
     create: function () {
         var formElement = document.getElementById('addBookForm');
         var formData = new FormData(formElement);
@@ -48,6 +60,10 @@
             }
         });
     },
+    /**
+     * kitap ödünç verme formunu yükler
+     * @param {any} bookId
+     */
     loadLend: function (bookId) {
         let targetEl = $("#lendItModalBody_" + bookId);
 
@@ -58,6 +74,10 @@
             }
         );
     },
+    /**
+     * kitap ödünç verme post
+     * @param {any} bookId
+     */
     lend: function (bookId) {
         var dto = {
             BookId: bookId,
@@ -76,6 +96,10 @@
                 targetModal.modal('hide');
             });
     },
+    /**
+     * kitabın ödünç verilme bilgisini getirir
+     * @param {any} bookId
+     */
     loadLendingDetails: function (bookId) {
         let targetEl = $("#lendingDetailsModalBody_" + bookId);
 
@@ -86,6 +110,10 @@
             }
         );
     },
+    /**
+     * kitap iadesi post
+     * @param {any} bookId
+     */
     refund: function (bookId) {
         var lendId = $("#bookLendId_" + bookId).val();
 

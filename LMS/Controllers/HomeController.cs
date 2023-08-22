@@ -1,9 +1,8 @@
-﻿using LMS.DTOs.ObjectStorage;
-using LMS.Models;
-using LMS.Services.Interfaces;
+﻿using Common.DTOs.ObjectStorage;
+using Core.Services.Interfaces;
+using LMS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace LMS.Controllers
@@ -28,6 +27,11 @@ namespace LMS.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /// <summary>
+        /// storage dan dosya indirme
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<IActionResult> DownloadFile(FileDTO dto)
         {
             var fileBytes = await _fileService.DownloadFile(dto);
