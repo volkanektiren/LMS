@@ -2,7 +2,7 @@
 
 ### Projenin local ortamda ayağa kaldırılması
 - compose.yaml dosyanı dockerda yürütüp, minio ve mssql ayağa kaldırılabilir
-- minio nun UI client ı üzerinden bucket oluşturulup, bucket a erişimi sağlayan access ayarının public e çekilmesi gerekir
+- minio nun UI client ı üzerinden 'files' adında bir bucket oluşturulup, bucket a erişimi sağlayan access ayarının public e çekilmesi gerekir
 - minio bucket ını oluşturulduktan sonra ekrana gelen access ve secret keylerinin projenin appsettingsinde ki minio a kısmına eklenmelidir
 - minio ve mssql port bilgilerinin docker ve proje appsettingsde aynı olması gerekir
 - mssql den LMS isimli bir db oluşturulur
