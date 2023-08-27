@@ -22,6 +22,7 @@ namespace Core.Services.Implementations.File
         private string SecretKey => Configuration["Minio:SecretKey"];
         private string Endpoint => Configuration["Minio:Endpoint"];
         private string Bucket => Configuration["Minio:Bucket"];
+        private string Region => Configuration["Minio:Region"];
 
         private readonly MinioClient _client;
 
@@ -34,6 +35,7 @@ namespace Core.Services.Implementations.File
             _client = new MinioClient()
                 .WithEndpoint(Endpoint)
                 .WithCredentials(AccessKey, SecretKey)
+                .WithRegion(Region)
                 .WithSSL(false)
                 .Build();
         }
